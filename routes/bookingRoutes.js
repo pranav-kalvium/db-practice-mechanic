@@ -3,17 +3,17 @@ const Booking = require('../models/Booking');
 const User = require('../models/User');
 const router = express.Router();
 
-// POST /bookings - Book an appointment
+
 router.post('/bookings', async (req, res) => {
   try {
     const { carModel, appointmentDate, mechanicId, ownerId } = req.body;
 
-    // Check if appointment is in the future
+  
     if (new Date(appointmentDate) <= new Date()) {
       return res.status(400).json({ error: 'Appointment must be in the future' });
     }
 
-    // Validate mechanic and owner roles
+   
     const mechanic = await User.findById(mechanicId);
     const owner = await User.findById(ownerId);
 
